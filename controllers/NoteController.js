@@ -133,7 +133,7 @@ export const getLastTags = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(500).json({
-      message: "Не загрузить статьи",
+      message: "Не удалось загрузить теги",
     });
   }
 };

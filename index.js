@@ -55,10 +55,10 @@ app.post("/upload", checkAuth, upload.single("image"), (req, res) => {
     url: `/uploads/${req.file.originalname}`,
   });
 });
-app.get("/tags", NoteController.getLastTags);
+app.get("/ntags", NoteController.getLastTags);
 app.get("/notes", NoteController.getAll);
 app.get("/notes/:id", NoteController.getOne);
-app.get("/notes/tags", NoteController.getLastTags);
+
 app.post(
   "/notes",
   checkAuth,
@@ -76,7 +76,7 @@ app.patch(
 );
 app.get("/posts", PostController.getAll);
 app.get("/posts/:id", PostController.getOne);
-app.get("/posts/tags", PostController.getLastTags);
+app.get("/ptags", PostController.getLastTags);
 app.post(
   "/posts",
   checkAuth,
@@ -92,6 +92,7 @@ app.patch(
   handleValidationErrors,
   PostController.update
 );
+app.patch("/user/:id", UserController.update);
 app.listen(process.env.PORT || 4000, (err) => {
   if (err) {
     return console.log(err);

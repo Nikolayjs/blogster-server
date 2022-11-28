@@ -5,7 +5,11 @@ const PostSchema = new mongoose.Schema(
   {
     title: {
       type: String,
-      require: true,
+      required: true,
+    },
+    description: {
+      type: String,
+      required: true,
     },
     content: {
       type: String,
@@ -15,7 +19,10 @@ const PostSchema = new mongoose.Schema(
       type: Array,
       default: [],
     },
-    imageUrl: String,
+    imageUrl: {
+      type: String,
+      required: true,
+    },
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",

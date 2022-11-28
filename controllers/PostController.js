@@ -81,6 +81,7 @@ export const create = async (req, res) => {
   try {
     const doc = new PostModel({
       title: req.body.title,
+      description: req.body.description,
       content: req.body.content,
       tags: req.body.tags,
       imageUrl: req.body.imageUrl,
@@ -105,6 +106,7 @@ export const update = async (req, res) => {
       },
       {
         title: req.body.title,
+        description: req.body.description,
         content: req.body.content,
         tags: req.body.tags,
         imageUrl: req.body.imageUrl,
@@ -133,7 +135,7 @@ export const getLastTags = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(500).json({
-      message: "Не загрузить теги",
+      message: "Не удалось загрузить теги",
     });
   }
 };

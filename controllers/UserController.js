@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import UserModel from "../models/User.js";
+import PostModel from "../models/Post.js";
 
 export const register = async (req, res) => {
   try {
@@ -11,6 +12,7 @@ export const register = async (req, res) => {
       fullName: req.body.fullName,
       email: req.body.email,
       passwordHash: hash,
+      about: req.body.about,
       avatarUrl: req.body.avatarUrl,
     });
     const user = await doc.save();
@@ -90,6 +92,31 @@ export const getMe = async (req, res) => {
     console.log(err);
     res.status(500).json({
       message: "Не удалось найти пользователя",
+    });
+  }
+};
+
+export const update = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    await UserModel.updateOne(
+      {
+        _id: userId,
+      },
+      {
+        fullName: req.body.fullName,
+        email: req.body.email,
+        about: req.body.about,
+        avatarUrl: req.body.avatarUrl,
+      }
+    );
+    res.json({
+      success: true,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      message: "Не удалось обновить статью",
     });
   }
 };

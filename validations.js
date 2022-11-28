@@ -20,7 +20,8 @@ export const notesValidation = [
 ];
 export const postsValidation = [
   body("title", "Введите заголовок").isLength({ min: 5 }).isString(),
+  body("description", "Введите заголовок").isLength({ min: 3 }).isString(),
   body("content", "Введите текст статьи").isLength({ min: 10 }).isString(),
   body("tags", "Неверный формат тегов").optional(),
-  body("imageUrl", "Неверная ссылка").optional().isString(),
+  body("imageUrl", "Неверная ссылка").isString(),
 ];
