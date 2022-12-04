@@ -25,3 +25,7 @@ export const postsValidation = [
   body("tags", "Неверный формат тегов").optional(),
   body("imageUrl", "Неверная ссылка").isString(),
 ];
+
+export const commentValidation = [
+  body("content", "Введите текст статьи").isLength({ min: 2 }).isString(),
+];

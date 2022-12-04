@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 
-// Описание заметки
 const PostSchema = new mongoose.Schema(
   {
     title: {
@@ -16,6 +15,10 @@ const PostSchema = new mongoose.Schema(
       required: true,
     },
     tags: {
+      type: Array,
+      default: [],
+    },
+    comments: {
       type: Array,
       default: [],
     },

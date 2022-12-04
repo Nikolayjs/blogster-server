@@ -131,9 +131,24 @@ export const getLastTags = async (req, res) => {
       .map((obj) => obj.tags)
       .flat()
       .slice(0, 5);
-    res.json(tags);
+    const uniqueTags = [...new Set(tags)];
+    res.json(uniqueTags);
   } catch (error) {
     console.log(error);
+    res.status(500).json({
+      message: "Не удалось загрузить теги",
+    });
+  }
+};
+
+export const getAllTags = async (req, res) => {
+  try {
+    const posts = await PostModel.find().exec();
+    const tags = posts.map((obj) => obj.tags).flat();
+    const uniqueTags = [...new Set(tags)];
+    res.json(uniqueTags);
+  } catch (err) {
+    console.log(err);
     res.status(500).json({
       message: "Не удалось загрузить теги",
     });

@@ -1,20 +1,15 @@
 import mongoose from "mongoose";
 
-const NoteSchema = new mongoose.Schema(
+const CommentSchema = new mongoose.Schema(
   {
-    title: {
-      type: String,
-      required: true,
-    },
     content: {
       type: String,
       required: true,
     },
-    tags: {
-      type: Array,
-      default: [],
+    postId: {
+      type: String,
+      required: true,
     },
-    imageUrl: String,
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
@@ -25,4 +20,4 @@ const NoteSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
-export default mongoose.model("Note", NoteSchema);
+export default mongoose.model("Comment", CommentSchema);

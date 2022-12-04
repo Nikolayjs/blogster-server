@@ -2,13 +2,15 @@ import express from "express";
 import mongoose from "mongoose";
 import multer from "multer";
 import cors from "cors";
+
 import {
   UserController,
   NoteController,
   PostController,
+  CommentController,
 } from "./controllers/index.js";
+
 import { checkAuth, handleValidationErrors } from "./utils/index.js";
-import { validationResult } from "express-validator";
 import * as validation from "./validations.js";
 import fs from "fs";
 
@@ -77,6 +79,7 @@ app.patch(
 app.get("/posts", PostController.getAll);
 app.get("/posts/:id", PostController.getOne);
 app.get("/ptags", PostController.getLastTags);
+app.get("/allposttags", PostController.getAllTags);
 app.post(
   "/posts",
   checkAuth,
@@ -93,6 +96,23 @@ app.patch(
   PostController.update
 );
 app.patch("/user/:id", UserController.update);
+
+app.get("/posts/:id/comments", CommentController.getAll);
+app.post(
+  "/posts/:id/comments",
+  checkAuth,
+  validation.commentValidation,
+  handleValidationErrors,
+  CommentController.create
+);
+app.patch(
+  "/posts/:id/comments/:id",
+  checkAuth,
+  validation.commentValidation,
+  handleValidationErrors,
+  CommentController.update
+);
+app.delete("/posts/:id/comments/:id", checkAuth, CommentController.remove);
 app.listen(process.env.PORT || 4000, (err) => {
   if (err) {
     return console.log(err);
