@@ -1,13 +1,13 @@
-import PostModel from "../models/Post.js";
+import PostModel from '../models/Post.js';
 
 export const getAll = async (req, res) => {
   try {
-    const posts = await PostModel.find().populate("user").exec();
+    const posts = await PostModel.find().populate('user').exec();
     res.json(posts);
   } catch (err) {
     console.log(err);
     res.status(500).json({
-      message: "Не удалось загрузить статьи",
+      message: 'Не удалось загрузить статьи',
     });
   }
 };
@@ -20,27 +20,27 @@ export const getOne = async (req, res) => {
         _id: postId,
       },
       {
-        returnDocument: "after",
+        returnDocument: 'after',
       },
       (err, doc) => {
         if (err) {
           console.log(err);
           res.status(500).json({
-            message: "Не удалось загрузить статью",
+            message: 'Не удалось загрузить статью',
           });
         }
         if (!doc) {
           return res.status(404).json({
-            message: "Статья не найдена",
+            message: 'Статья не найдена',
           });
         }
         res.json(doc);
       }
-    ).populate("user");
+    ).populate('user');
   } catch (err) {
     console.log(err);
     res.status(500).json({
-      message: "Не удалось загрузить статью",
+      message: 'Не удалось загрузить статью',
     });
   }
 };
@@ -56,12 +56,12 @@ export const remove = async (req, res) => {
         if (err) {
           console.log(err);
           res.status(500).json({
-            message: "Не удалось удалить статью",
+            message: 'Не удалось удалить статью',
           });
         }
         if (!doc) {
           return res.status(404).json({
-            message: "Статья не найдена",
+            message: 'Статья не найдена',
           });
         }
         res.status({
@@ -72,7 +72,7 @@ export const remove = async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).json({
-      message: "Не удалось загрузить статью",
+      message: 'Не удалось загрузить статью',
     });
   }
 };
@@ -84,15 +84,17 @@ export const create = async (req, res) => {
       description: req.body.description,
       content: req.body.content,
       tags: req.body.tags,
-      imageUrl: req.body.imageUrl,
+      imageUrl: req.body.imageUrl ? req.body.imageUrl : '/uploads/anonymus.jpg',
       user: req.userId,
+      isCourse: req.body.isCourse,
+      courseTitle: req.body.courseTitle,
     });
     const post = await doc.save();
     res.json(post);
   } catch (err) {
     console.log(err);
     res.status(500).json({
-      message: "Не удалось создать статью",
+      message: 'Не удалось создать статью',
     });
   }
 };
@@ -109,8 +111,10 @@ export const update = async (req, res) => {
         description: req.body.description,
         content: req.body.content,
         tags: req.body.tags,
-        imageUrl: req.body.imageUrl,
+        imageUrl: req.body.imageUrl ? req.body.imageUrl : '/uploads/anonymus.jpg',
         user: req.userId,
+        isCourse: req.body.isCourse,
+        courseTitle: req.body.courseTitle,
       }
     );
     res.json({
@@ -119,7 +123,7 @@ export const update = async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).json({
-      message: "Не удалось обновить статью",
+      message: 'Не удалось обновить статью',
     });
   }
 };
@@ -136,7 +140,7 @@ export const getLastTags = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(500).json({
-      message: "Не удалось загрузить теги",
+      message: 'Не удалось загрузить теги',
     });
   }
 };
@@ -150,7 +154,7 @@ export const getAllTags = async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).json({
-      message: "Не удалось загрузить теги",
+      message: 'Не удалось загрузить теги',
     });
   }
 };

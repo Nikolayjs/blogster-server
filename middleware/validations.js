@@ -15,7 +15,6 @@ export const loginValidation = [
 export const notesValidation = [
   body("title", "Введите заголовок").isLength({ min: 3 }).isString(),
   body("content", "Введите текст заметки").isLength({ min: 5 }).isString(),
-  body("tags", "Неверный формат тегов").optional(),
   body("imageUrl", "Неверная ссылка").optional().isString(),
 ];
 export const postsValidation = [

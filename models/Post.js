@@ -24,12 +24,19 @@ const PostSchema = new mongoose.Schema(
     },
     imageUrl: {
       type: String,
-      required: true,
+      default: "/anonymus.jpg",
     },
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
+    },
+    isCourse: {
+      type: Boolean,
+      default: false,
+    },
+    courseTitle: {
+      type: String,
     },
   },
   {

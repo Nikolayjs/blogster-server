@@ -10,10 +10,6 @@ const NoteSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    tags: {
-      type: Array,
-      default: [],
-    },
     imageUrl: String,
     user: {
       type: mongoose.Schema.Types.ObjectId,

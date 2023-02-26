@@ -82,7 +82,6 @@ export const create = async (req, res) => {
     const doc = new NoteModel({
       title: req.body.title,
       content: req.body.content,
-      tags: req.body.tags,
       imageUrl: req.body.imageUrl,
       user: req.userId,
     });
@@ -106,7 +105,6 @@ export const update = async (req, res) => {
       {
         title: req.body.title,
         content: req.body.content,
-        tags: req.body.tags,
         imageUrl: req.body.imageUrl,
         user: req.userId,
       }
